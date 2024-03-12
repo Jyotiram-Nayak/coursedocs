@@ -1,0 +1,442 @@
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+=====================Website Links=====================
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+dotNet Community
+https://dotnet.microsoft.com/en-us/platform/community
+https://aka.ms/ef-core-connection-strings
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+program.cs
+================================================================================
+## the program.cs file is merge of both startup.cs file and program.cs file from erlier version
+## builder object expose the same services which is use to resive by Startup(ConfigureServices)
+## using builder object you can add your own services addition,external services
+
+## use those services by using the app instance
+## exactly what we were doing in configure function that use those services like routing static fils or even end points all need to be done using the app instance
+
+example 
+========================================
+add services 
+middleware
+dipendency injector
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+=====================ERROR======================
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Severity Code Description Project File Line Suppression State  in dotnet core 8 
+Error CS1061 'DbContextOptionsBuilder' does not contain a definition for 'UseSqlServer' and no accessible extension method 'UseSqlServer' accepting a first argument of type 'DbContextOptionsBuilder' could be found (are you missing a using directive or an assembly reference?)
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+====================SOLUTION====================
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+## Run the following command in the NuGet Package Manager Console:
+-- Install-Package Microsoft.EntityFrameworkCore.SqlServer 
+
+## Make sure you have the correct using directive for Entity Framework Core
+## using Microsoft.EntityFrameworkCore;
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+================================================================================
+
+create project using CLI
+--------------------------
+-- dotnet new list
+## it will display some Template Name 
+-- dotnet new mvc --name MyFirstWeb
+## hear in this Template Name is mvc 
+## after that write the project name as your choice
+
+
+Add migration
+--------------------------
+-- Add-Migration InitialCreate
+-- Update-Database
+
+Step to create a ASP.Net Core EntityFramework project
+-------------------------------------------------------
+# create a core project with mvc
+# 
+How to Create a SQLite Database with Entity Framework Core in an ASP.NET Core MVC 
+
+
+Step to convert console app into web application
+-------------------------------------------------------
+# Update SDK in csproj
+# Update output type in csproj
+# Add bew WbHostBuilder
+# Add routing
+# Setup default route
+
+Route (two type of  routing)
+-------------------------------------------------------
+## we can use both Convention Route and attribute Route in a single application
+
+1. Convention Based Route
+## fisrt we have to add this services befoure create the builder.build() instance
+-- builder.Services.AddControllersWithViews();
+
+## using MapDefaultControllerRoute middleware we can add the default route
+## controller actions to the <see cref="IEndpointRouteBuilder"/> and adds the default route
+## {controller=Home}/{action=Index}/{id?}
+-- app.MapDefaultControllerRoute();
+
+-- app.MapControllerRoute(
+--   name:"default",
+--   pattern:"{controller=Student}/{action=Index}/{id?}"
+-- );
+
+2. Attibute Based Route
+## fisrt we have to add this services befoure create the builder.build() instance
+-- builder.Services.AddControllersWithViews();
+
+## then use this middleware 
+## using this middleware we can implement the attribute routing
+-- app.MapControllers();
+
+## to use attribute route we have to add route attribute befoure the action method
+example
+---------------------------
+[Route("")]
+[Route("Home")]
+[Route("Home/Index")]
+public IActionResult Index()         ## Action Method
+{
+    return View();
+}
+
+## we can use tokens for route
+[controller] ## Token for Controller 
+[action]  ## Token for Action
+## we can use both token together
+
+
+http Methods
+-------------------------------------------------------
+## Map method is use for genral perpose all type of http request
+
+
+Passing Data from Controller to View using object
+-------------------------------------------------------
+## ViewData 
+-----------------
+## ViewData is dictionary of object that is derived from ViewDataDictionary class
+## Syntax 
+-- ViewData["Key"] = "Value";
+
+## Passing data from controller
+-- ViewData["name"] = "Jyotiram";
+-- ViewData["age"] = 22;
+-- string[] subject= ["Asp.net", "PHP"];
+-- ViewData["subject"] = subject;
+
+## Diplay in View
+@{
+    foreach (var item in (string[])ViewData["subject"])
+    {
+        <h2>@item</h2>
+    }
+}
+
+## ViewBag
+-----------------
+## Syntax 
+-- ViewBag.property = "Value";
+
+-- VuewBag.name = "Jyotiram";
+-- VuewBag.age = 22;
+-- string[] subject= ["Asp.net", "PHP"];
+-- VuewBag.subject = subject;
+
+## Diplay in View
+@ViewBag.subject 
+@{
+    foreach (var item in ViewBag.subject) ##no need to typecast
+    {
+        <h2>@item</h2>
+    }
+}
+
+## TempData
+-----------------
+## TempData stores data as key value pairs.
+## Temp Data Value mustbe typecast befoure use
+## TempData is accessible in current or subsequent request
+## you can only one time TempData 
+## Call TempData.keep() method to keep all the value of temp data.
+
+## Strongly Typed Views
+-----------------
+## Strongly typed view or strongly typed object is used to pass data from controller to a view.
+## The view which binds with any model is called as strongly typed view.
+## You can bind any class as a model to view.
+## You can access model properties on that view.
+## You can use data associated with model to render controls.
+
+## The view that is designed by targeting specific model class object then that view is called "Strongly Typed View".
+## In strongly typed view, view is bind with corresponding model class object or list of objects.
+
+
+How to Install Client side Library like bootstrap, tailwind, jquery in Asp.net 
+-------------------------------------------------------
+## All Static Files like bootstrap, css, js, jquery are placed inside wwwroot folder.
+## Images folder is also placed in wwwroot folder
+## app.UseStaticFiles(); without this method you cannot access static files like bootstrap, css, js, jquery etc.
+
+
+_ViewImport.cshtml
+-------------------------------------------------------
+## In ASP.NET Core MVC Application, the _ViewImports.chtml file provides a mechanism to include the directives globally
+    for Razor Pages / Views so that we don't have to add them individually in each and every page.
+
+## ViewImports.chtml file supports the following directives:
+## @addTagHelper
+## @tagHelperPrefix
+## @removeTagHelper
+## @namespace
+## @inject
+## @model
+## @using
+
+Tag Helper
+-------------------------------------------------------
+## Tag helpers are basically special attributes provided by Asp.net Core.
+## Tag Helpers enable server-side components to participate in creating and rendering HTML elements in Views.
+## Tag helpers are a new feature and similar to HTML helpers (MVC 5), which help us render HTML.
+## Before start working with tag helpers, make sure you have included namespace for tag helpers in your ViewImports file.
+## Microsoft.AspNetCore.Mvc.TagHelpers.
+## Add this line in in your Viewlmports file.
+## @addTagHelper * Microsoft.AspNetCore.Mvc.TagHelpers
+
+
+## Tag Helper examples
+-----------------
+-- <a href="/Home/AboutUs">AboutUs</a>
+-- @Html.ActionLink("Contact Page","Contact","Home");
+-- <a href="@Url.Action("AboutUs","Home")">AboutUs</a>
+-- <a asp-controller="Home" asp-action="Contact">Contact Page</a>
+
+## Image Tag Helper
+-----------------
+## In order to use the Image Tag Helper in ASP.NET Core Application, you need to add the asp-append-version attribute to the
+<img> tag and need to set the value to true.
+
+## Input Tag Helper
+-------------------------------------------------------
+## The asp-for attribute is arguably one of the most common tag helpers that you'll encounter, and its
+    primary purpose is to handle binding a specific property to the element that it decorates.
+## asp-for tag helper is used for an <input>, it sets the name attribute, so that it can be bound to model class.
+## e.g. asp-for="Movie.Year" when retrieving data from a POST request.
+## asp-for sets the id, name and validation related attributes.
+
+## example
+-----------------
+<form class="d-grid" asp-action="Form" asp-controller="Home" method="post">
+    <input asp-for="Id" class="form-control" placeholder="Enter RollNo" />
+    <br />
+    <input asp-for="Name" class="form-control" placeholder="Enter Name" />
+    <br />
+    <select asp-items="Html.GetEnumSelectList<Gender>()" class="form-control">
+        <option value="">Select Gender</option>
+    </select>
+    <br />
+    <input asp-for="Age" class="form-control" placeholder="Enter Gender" />
+    <br />
+    <input asp-for="Salary" class="form-control" placeholder="Enter Standard" />
+    <br />
+    <input type="submit" class="btn btn-outline-primary btn-block" />
+</form>
+
+## Browser cache 
+-------------------------------------------------------
+## In general, when you visit a web page and if that web page contains some image, then most of the modern web browser cache the images for later use.
+## In the future, when you revisit to that web A Pull up for precise then the browser loads the images from cache instead of downloading the images from the server.
+## In most of the caches, this is not an issue as the images are not changes that often for a web page.
+
+========================================================================================================================================================
+-------------------Model Validation-------------------
+-------------------------------------------------------
+## The ASP.NET Core gives us Model Validator, which uses the validation attributes to validate the model, which makes our task easier.
+## We also take a look at ModelState and how to use it. Finally, we look at the list of Validation attributes.
+
+## The Form Data is posted to Controller action is automatically mapped to the action parameter by the Model Binder. We already looked at how Model Binding works in ASP.NET Core.
+## The Model needs to be validated for the correctness.
+## These validations can be done at the client side before sending data to the server or at the server side when the data is received from the client.
+
+## We learnt how Model binding works in ASP.NET Core applications. When the HTTP Request arrives Model binder is invoked before passing the control to controller action method.
+## The Model binder not only binds the value to the action parameter but also validates them by using the Model Validator.
+
+## The Model Validator runs after the model binding and runs a series of validations on each property of 
+    the model based on the attributes that you set on the model property.
+## These attributes are called Validation attributes and contain the code, which is used by the Model Validator to validate the model. 
+## [Required]
+## [StringLength]
+## [EmailAddress]
+## [Range]
+## [RegularExpression]
+## [Compare]
+## [Phone]
+## [Url]
+
+RegularExpression
+-----------------
+## email 
+-- "^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$"
+
+examples
+-----------------
+-- [Required(ErrorMessage = "Plese enter Id")]
+-- [StringLength(15,MinimumLength =3,ErrorMessage = "Name is must be 3 to 15 char")]
+-- [RegularExpression(@"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$", ErrorMessage ="Invalid Emial")]
+-- [Range(10,50,ErrorMessage ="Age is must be 10 to 50")]
+
+
+Validation Tag Helper
+-------------------------------------------------------
+## There are 2 validation tag helpers in asp.net core mvc
+## Validation Message Tag Helper: It displays the validation message for a single property of a Model. 
+-- E-g: asp-validation-for
+## Validation Summary Tag Helper: It displays a summary of validation messages for all the properties of a Model.
+-- E-q: asp-validation-summary
+
+
+## Entity Framework
+-------------------------------------------------------
+## To address the data access requirements of ASP.NET CORE MVC application, you can use an ORM (OBJECT RELATIONAL MAPPING) framework.
+
+## Simplifies the process of accessing data from applications.
+## ORM is a tool for storing data from domain objects to relational database.
+
+## Entity Framework Core is the new version of Entity Framework after EF 6 but it is redesigned.
+## It is open-source, lightweight, extensible and a cross-platform version of Entity Framework.
+## Entity Framework Core is a data access technology.
+
+## Entity Framework is an Object/Relational Mapping (ORM) framework.
+## It is an enhancement to ADO.NET that gives developers an automated mechanism for accessing & storing the data in the database.
+## EF Core is intended to be used with .NET Core applications. However, it can also be used with standard .NET 4.5+ framework based applications.
+
+EF Core Development Approaches
+-----------------
+## EF Core supports two development approaches
+## 1) Code-First
+## 2) Database-First. 
+
+========================================================================================================================================================
+-------------------Steps for Code-First approaches-------------------
+-------------------------------------------------------
+## 1st Step : Install 3 Packages in your ASP.NET Core MVC application.
+1. Microsoft.EntityFrameworkCore.Sq|Server
+2. Microsoft.EntityFrameworkCore.Tools
+## They're primarily used to manage Migrations and to scaffold a DbContext.
+3. Microsoft.EntityFrameworkCore.Design
+## Microsoft.EntityFrameworkCore.Design contains all the design-time logic for Entity Framework Core.
+
+## 2nd Step:
+1) Create a Model Class.
+2) Create a DbContext Class.
+
+## Model Class
+## example
+------------------
+public class StudentModel
+{
+    [Key]                                                   #use for Primary Key
+    public int Id { get; set; }
+    [Column("StudentName",TypeName ="nvarchar(50)")]
+    public string Name { get; set; }                        #use for column name in table
+    [Column("StudentGender", TypeName = "nvarchar(20)")]
+    public string Gender { get; set; }
+    public int Age { get; set; }
+}
+------------------
+
+## DbContext Class
+------------------
+## The DbContext class is an integral part of Entity Framework.
+## This is the class that we use in our application code to interact with the underlying database.
+## It is this class that manages the database connection and is used to retrieve and save data in the database.
+## An instance of DbContext represents a session with the database which can be used to query and save instances of your entities to a database.
+## DbContext is a combination of the Unit Of Work and Repository patterns. 
+## DbContext can be used to define the database context class after creating a model class.
+## DbContext co-ordinates with Entity Framework and allows you to query and save the data in the database.
+## Uses the DbSet <T> type to define one or more properties where, T represents the type of an object that needs to be stored in the database
+## example
+------------------
+-- public class StudentDBContext:DbContext
+-- {
+--     public StudentDBContext(DbContextOptions options):base(options)
+--     {
+--         
+--     }
+--     public DbSet<Student> Students { get; set; }
+-- }
+------------------
+
+
+## DbContextOptions in Entity Framework Core
+------------------
+## For the DbContext class to be able to do any useful work, it needs an instance of the DbContextOptions class.
+## The DbContextOptions instance carries configuration information such as the connection string, database provider to use etc. A
+
+## 3rd Step:
+## Create a Connection String in appsettings.json file.
+
+## 4th Step:
+## Registering Connection String In Program.cs File.
+
+## 5th Step:
+## Add a migration and run the migration.
+
+========================================================================================================================================================
+-------------------Steps for Database-First approaches-------------------
+-------------------------------------------------------
+## In the database-first approach the Entity Framework core creates model classes and properties corresponding to the existing database objects, such as tables and columns.
+## The database-first approach is applicable in scenario where a database already exists for the application.
+
+## 1st Step:
+## Install 3 1Packages in your ASP.NET Core MVC application.
+1. Microsoft.EntityFrameworkCore.Sq|Server
+2. Microsoft.EntityFrameworkCore.Tools
+3. Microsoft.EntityFrameworkCore.Design
+
+
+## 2nd Step:
+## Execute a command for Scaffold DbContext.
+-- Scaffold-DbContext "server=DESKTOP-T68EB1A\SQLEXPRESS;database=Student;trusted_connection=true;TrustServerCertificate=True;" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Models
+// Server=DESKTOP-T68EB1A\SQLEXPRESS;Database=Student;Trusted_Connection=True;MultipleActiveResultSets=true;Encrypt=True;TrustServerCertificate=True;
+
+## If we update our database then how we can update our Model and DbContext.
+## By using this command:
+-- Scaffold-DbContext "server=ServerName;database=DatabaseName;trusted_connection=true" Microsoft.EntityFrameworkCore.Sq|Server -OutputDir Models -force
+
+
+## 3rd Step:
+## Move Connection String from DbContext Class To appsettings.json file.
+
+
+## 4th Step:
+## Registering Connection String In Program.cs File.
+
+========================================================================================================================================================
+
+
+Seminar topic
+-------------------------------------------------------
+Name : Jyotiram Nayak B.
+Roll No : 52
+I recently find this seminar topic :
+*Title:  Microservices in .net core Authentication using jwt*
+*Desc :* In a .NET Core microservices environment, authentication using JSON Web Tokens (JWT) helps protect communication between different services in a distributed system.
+Microservices means splitting up a complex application into smaller, independent services that can be managed and updated separately. 
+Each service usually handles a particular feature or functionality. JWT is a concise and secure way to share claims between two parties. 
+It can be digitally signed, which ensures the information it carries is safe as it moves between parties.
+
+
+how to access dark web
+-------------------------------------------------------
+-- install vpn ## hide me vpn
+-- install tor brouser
+-- change ip address ## useing kali linux
+-- change mac address ## useing kali linux
+-- change proxey
