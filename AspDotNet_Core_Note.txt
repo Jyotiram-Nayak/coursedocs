@@ -19,9 +19,9 @@ program.cs
 
 example 
 ========================================
-add services 
-middleware
-dipendency injector
+-- add services 
+-- middleware
+-- dipendency injector
 
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 =====================ERROR======================
@@ -39,8 +39,30 @@ Error CS1061 'DbContextOptionsBuilder' does not contain a definition for 'UseSql
 
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ================================================================================
+## Introduction
+-------------------------------------------------------
+• Nowadays, everyone is talking about open source, cross platform development.
+• Microsoft has always been known for its Windows based products, but now we are in the new age of development. 
+• For this, a new revolutionary product came into the market, which is Microsoft NET Core.
+• NET Core is a free open source and cross platform framework, created for building modern Cloud based Applications and every
+• NET developer feels proud of it.
+• Now, there are no boundaries for the platform. Now, every NET developer can say, yes I am platform independent, l am using an open source.
 
-create project using CLI
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+## create project using CLI
 --------------------------
 -- dotnet new list
 ## it will display some Template Name 
@@ -61,7 +83,7 @@ Step to create a ASP.Net Core EntityFramework project
 How to Create a SQLite Database with Entity Framework Core in an ASP.NET Core MVC 
 
 
-Step to convert console app into web application
+## Step to convert console app into web application
 -------------------------------------------------------
 # Update SDK in csproj
 # Update output type in csproj
@@ -69,7 +91,7 @@ Step to convert console app into web application
 # Add routing
 # Setup default route
 
-Route (two type of  routing)
+## Route (two type of  routing)
 -------------------------------------------------------
 ## we can use both Convention Route and attribute Route in a single application
 
@@ -112,12 +134,12 @@ public IActionResult Index()         ## Action Method
 ## we can use both token together
 
 
-http Methods
+## http Methods
 -------------------------------------------------------
 ## Map method is use for genral perpose all type of http request
 
 
-Passing Data from Controller to View using object
+## Passing Data from Controller to View using object
 -------------------------------------------------------
 ## ViewData 
 -----------------
@@ -178,14 +200,14 @@ Passing Data from Controller to View using object
 ## In strongly typed view, view is bind with corresponding model class object or list of objects.
 
 
-How to Install Client side Library like bootstrap, tailwind, jquery in Asp.net 
+## How to Install Client side Library like bootstrap, tailwind, jquery in Asp.net 
 -------------------------------------------------------
 ## All Static Files like bootstrap, css, js, jquery are placed inside wwwroot folder.
 ## Images folder is also placed in wwwroot folder
 ## app.UseStaticFiles(); without this method you cannot access static files like bootstrap, css, js, jquery etc.
 
 
-_ViewImport.cshtml
+## _ViewImport.cshtml
 -------------------------------------------------------
 ## In ASP.NET Core MVC Application, the _ViewImports.chtml file provides a mechanism to include the directives globally
     for Razor Pages / Views so that we don't have to add them individually in each and every page.
@@ -199,7 +221,7 @@ _ViewImport.cshtml
 ## @model
 ## @using
 
-Tag Helper
+## Tag Helper
 -------------------------------------------------------
 ## Tag helpers are basically special attributes provided by Asp.net Core.
 ## Tag Helpers enable server-side components to participate in creating and rendering HTML elements in Views.
@@ -251,7 +273,7 @@ Tag Helper
 ## Browser cache 
 -------------------------------------------------------
 ## In general, when you visit a web page and if that web page contains some image, then most of the modern web browser cache the images for later use.
-## In the future, when you revisit to that web A Pull up for precise then the browser loads the images from cache instead of downloading the images from the server.
+## In the future, when you revisit to that web precise then the browser loads the images from cache instead of downloading the images from the server.
 ## In most of the caches, this is not an issue as the images are not changes that often for a web page.
 
 ========================================================================================================================================================
@@ -406,6 +428,7 @@ public class StudentModel
 -- Scaffold-DbContext "server=DESKTOP-T68EB1A\SQLEXPRESS;database=Student;trusted_connection=true;TrustServerCertificate=True;" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Models
 // Server=DESKTOP-T68EB1A\SQLEXPRESS;Database=Student;Trusted_Connection=True;MultipleActiveResultSets=true;Encrypt=True;TrustServerCertificate=True;
 
+Scaffold-DbContext "server=DESKTOP-T68EB1A\SQLEXPRESS;database=EmployeeDB;trusted_connection=true;TrustServerCertificate=true;" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Models
 ## If we update our database then how we can update our Model and DbContext.
 ## By using this command:
 -- Scaffold-DbContext "server=ServerName;database=DatabaseName;trusted_connection=true" Microsoft.EntityFrameworkCore.Sq|Server -OutputDir Models -force
@@ -419,24 +442,181 @@ public class StudentModel
 ## Registering Connection String In Program.cs File.
 
 ========================================================================================================================================================
-
-
-Seminar topic
+## Session
 -------------------------------------------------------
-Name : Jyotiram Nayak B.
-Roll No : 52
-I recently find this seminar topic :
-*Title:  Microservices in .net core Authentication using jwt*
-*Desc :* In a .NET Core microservices environment, authentication using JSON Web Tokens (JWT) helps protect communication between different services in a distributed system.
-Microservices means splitting up a complex application into smaller, independent services that can be managed and updated separately. 
-Each service usually handles a particular feature or functionality. JWT is a concise and secure way to share claims between two parties. 
-It can be digitally signed, which ensures the information it carries is safe as it moves between parties.
+What Is Session ?
+## It is a state management technique.
+## Session state is an ASP.NET Core scenario for storage of user data while the user browses a web app.
+## Session state uses a store maintained by the app to persist data across requests fron a client.
+## The session data is backed by a cache considered ephemeral data. 
+
+## Critical application data should be stored in the user database and cached in session only as a performance optimization.
+## The session is specific to the browser, Sessions aren't shared across browsers.
+## Session are deleted when the browser session ends.
+## Sessions are Server-Side.
+
+## Session is also used to pass data within the ASP.NET Core MVC application and unlike TempData.
+## It persist for its expiration time (default time is 20 minutes but it can be increased or decreased).
+
+## add timeline to session (Register in Program.cs file)
+-- builder.Services.AddSession(options =>
+--      options.IdleTimeout = TimeSpan.FromMinutes(10);
+-- }) ;
+
+## Session is valid for all requests, not for a single redirect. 
+## A session state stores application-specific data in key-value pairs.
+
+## A session state stores user-specific information for an ASP.NET MVC application.
+## However, the scope of session state is limited to the current browser session.
+## When many users access an application simultaneously, then, each of these users will have a different session state.
+## Every session has a unique session id.
 
 
-how to access dark web
+-- HttpContext.Session.SetString("MyName", "Jyotiram");
+## Get Session Id
+-- TempData["SessionID"] = HttpContext.Session.Id;
+
+## Remove Session 
+-- HttpContext.Session.Remove("MyName");
+
+Steps
+--------------------
+## Step:1
+## Add below line before build,
+-- builder.Services.AddSession();
+
+
+## Step:2
+## Create Session Variable.
+-- HttpContext.Session.SetString("MyName", "Jyotiram");
+## We can set different type of values in a session.
+
+## Step:3
+## Access Session Variable.
+-- HttpContext.Session.GetString("MyKey");
+
+-- HttpContext.Session.SetString("MyName", "Jyotiram nayak");
+
+## Step:4
+## If you want to access session directly in view, not in action method then you have to use HttpContextAccessor.
+
+## Display in view
+-- @using Microsoft.AspNetCore.Http
+-- @inject Microsoft.AspNetCore.Http.IHttpContextAccessor accessor
+-- @{
+--     ViewData["Title"] = "About";
+-- }
+-- <h1>About‹</h1>
+-- <h3>@accessor .HttpContext.Session.GetString("MyKey")</h3>
+-- @*<h3>@ViewBag-Data</h3>*@
+
+========================================================================================================================================================
+
+
+## Api (Application Programming Interface)
 -------------------------------------------------------
--- install vpn ## hide me vpn
--- install tor brouser
--- change ip address ## useing kali linux
--- change mac address ## useing kali linux
--- change proxey
+## As per Wikipedia's Definition of API: In computer programming, (API) is a set of subroutine definitions, 
+    protocols, and tools for building software and applications.
+## HTTP PROTOCOL
+## HTTP VERBS
+## GET POST PUT DELETE 
+
+## The HTTP Protocol is utilized by Web API, a concept that is used to increase an application's capabilities.
+## A web-based application alone is no longer sufficient to reach all of its users or clients.
+
+## Web API is an application programming interface (API) that is used to enable communication or interaction with software components with each other.
+## Web API is the enhanced form of the web application to provide services on different devices like laptop, mobile, and others.
+
+## ASP.NET Core Web API is a framework developed by Microsoft that allows you to build and create RESTful APIs (Application Programming Interfaces) using the ASP.NET Core platform.
+
+## It's designed to facilitate the development of lightweight, fast, and efficient APls that can be consumed by various clients, such as web applications, mobile apps, or other services.
+## Web API allows users to access a particular resource using HTTP protocol. 
+## We can build Web API using different technologies like NET, PHP, JAVA, PYTHON etc 
+## In . Net Microsoft has created a framework for web API called ASP.NET Core WEB API.
+## ASP.NET Core Web API is a framewor makes it easy to build HTTP web services (Restful HTTP services).
+
+
+## It is provided by Dot Net Framework.
+## That web services reaches a broad range of clients, including browser, mobile applications, Desktop application and IOTs.
+## It is very similar to ASP.NET MVC since it contains the MVC features.
+
+## Web APl is a programming interface/application type that provides communication or interaction between software applications.
+## Web APl is often used to provide an interface for web sites and client applications to have data access.
+## Web APis can be used to access data from a database and save data back to the database.
+
+
+## RESTFUL Architecture:
+-------------------------------------------------------
+## ASP.NET Core Web API follows the principles of Representational State Transfer (REST).
+## It uses HTTP methods like GET, POST, PUT, and DELETE to interact with resources identified by URLs (Uniform Resource Locators).
+
+## Rest Stands for "Representational state transfer". 
+## Its introduce in 2000 by Roy Fielding.
+## In REST architecture, a REST Server simply provides access to resources and the REST client accesses and presents the resources.
+## Here each resource is identified by URIs! lobal IDs.
+
+## A resource is any information that has name like image, entity, document etc. 
+## REST uses various representations to represent a resource like Text, JSON and XML.
+## JSON is now the most popular format being used in Web Services.
+
+## A Restful system consists of:
+## client who requests for the resources.
+## server who has the resources.
+
+## REST architectural pattern specifies a set of constraints that a system adhere to.
+1. Uniform Interface
+2. Client Server
+3. Stateless
+4. Cacheable
+5. Layered system
+6. Code on demand
+
+## ControllerBase
+-------------------------------------------------------
+## The ControllerBase class is a base class for controllers in ASP.NET Core that handles HTTP requests. 
+## It provides a set of common properties and methods controllers use to handle HTTP requests and generate HTTP responses.
+
+## [ApiController] attribute
+-------------------------------------------------------
+## The [ApiController] attribute enables a few features including attribute routing requirement, 
+    automatic model validation and binding source parameter inference.
+
+## StringContent class
+-------------------------------------------------------
+## StringContent class creates a formatted text appropriate for the http server/client communication.
+## After a client request, a server will respond with a HttpResponseMessage and that response will need a content, that can be created with the StringContent class.
+
+## Authentication
+-------------------------------------------------------
+## Authentication is process of checking the identity of the user that accessing our application.
+
+## Authorization
+-------------------------------------------------------
+## Authorization is process of validating privileges to access a resource of the application.
+## After successful login to the application (authentication), authorization mechanism checks whether login user has privileges to access the application resource.
+
+## Identity Framework
+-------------------------------------------------------
+## ASP.NET Core Identity is a built-in membership system.
+## It is used to Create, Read, Update and Delete User Accounts.
+## Account Information. 
+## Authentication & Authorization
+## Password Recovery
+## Two factor authentication with SMS.
+## It supports External Login Providers like Microsoft, Facebook, Google Gmail etc.
+## ASP.Net Core provides identity membership system that enable us to add login functionality to our application.
+## It is an API that supports User Interface (Ul) Login Functionality.
+## Manage users, password, profile data, roles, tokens, email confirmation.
+## And much more
+
+Remember me
+-------------------------------------------------------
+JWT Token 
+xUnit
+AJAX jquery
+Validation
+
+SP
+Trigger
+View
+Case

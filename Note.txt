@@ -4,25 +4,26 @@ started from playlist 29
 target upto playlist 40
 ====================
 
-Date:11-03-2024
+Date:14-03-2024
 
 Today's work update :-
-CRUD Operation using Code First Approach,
-Database First Approach,
-CRUD Operation using Database First Approach
+crud operation using asp.net core web api
+introduction identity framework
 
-In time:11:00 Am
-Out time:8:00 PM
+In time:10:50 Am
+Out time:7:20 PM
 
-Today's Learning hours: 8:30
-Current week total Learning hours:08:30
+Today's Learning hours: 8:00
+Current week total Learning hours:33:30
 
 =================================================================
 --------------------------Websites-------------------------------
 =================================================================
-MaterialUi
 
-
+Material Ui - https://mui.com/material-ui/
+Neumorphism.io - https://neumorphism.io/#e0e0e0
+Tostify react - https://fkhadra.github.io/react-toastify/introduction/
+https://lucasbassetti.com
 
 
 
@@ -151,3 +152,26 @@ app route - 49 to 90
 page route - 91 to 260(practice 204-242)
 authentication - 243 - 260
 advance app route - 260 onword
+
+
+
+
+Seminar topic
+-------------------------------------------------------
+Name : Jyotiram Nayak B.
+Roll No : 52
+I recently find this seminar topic :
+*Title:  Microservices in .net core Authentication using jwt*
+*Desc :* In a .NET Core microservices environment, authentication using JSON Web Tokens (JWT) helps protect communication between different services in a distributed system.
+Microservices means splitting up a complex application into smaller, independent services that can be managed and updated separately. 
+Each service usually handles a particular feature or functionality. JWT is a concise and secure way to share claims between two parties. 
+It can be digitally signed, which ensures the information it carries is safe as it moves between parties.
+
+
+how to access dark web
+-------------------------------------------------------
+-- install vpn ## hide me vpn
+-- install tor brouser
+-- change ip address ## useing kali linux
+-- change mac address ## useing kali linux
+-- change proxey
