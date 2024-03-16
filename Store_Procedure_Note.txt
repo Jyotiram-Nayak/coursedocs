@@ -1,0 +1,65 @@
+## This statement sets the session's ANSI_NULLS option to ON. 
+   When ANSI_NULLS is ON, comparisons against NULL values use the ANSI SQL standard behavior, 
+   where NULL is considered to be different from any other value, including another NULL. This ensures consistent behavior in SQL queries.
+-- SET ANSI_NULLS ON
+
+SET QUOTED_IDENTIFIER ON: This statement sets the session's QUOTED_IDENTIFIER option to ON. When QUOTED_IDENTIFIER is ON, 
+double quotation marks (") are used to delimit identifiers (such as table or column names), and single quotation marks (') are used to delimit string literals. 
+This is important for ensuring proper parsing of SQL statements, especially when dealing with identifiers that contain special characters or keywords.
+
+
+BEGIN: This keyword marks the beginning of the stored procedure's body. Everything between BEGIN and END comprises the stored procedure's logic.
+
+
+## YOU CAN NOT MODIFY THE STORE PROCEDURE AFTER CREATING IT WITH ADDING THE KEY WORD 'WITH ENCRYPTION' JUST AFTER 'CREATE PROCEDURE PROCEDURE_NAME'
+-- 'WITH ENCRYPTION'
+
+
+========================= Basic Syntax for define a store procedure =========================
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:		<Author,,Name>
+-- Create date: <Create Date,,>
+-- Description:	<Description,,>
+-- =============================================
+CREATE PROCEDURE <Procedure_Name, sysname, ProcedureName> 
+	-- Add the parameters for the stored procedure here
+	<@Param1, sysname, @p1> <Datatype_For_Param1, , int> = <Default_Value_For_Param1, , 0>, 
+	<@Param2, sysname, @p2> <Datatype_For_Param2, , int> = <Default_Value_For_Param2, , 0>
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+    -- Insert statements for procedure here
+	SELECT <@Param1, sysname, @p1>, <@Param2, sysname, @p2>
+END
+GO
+-- =============================================
+-- SET ANSI_NULLS ON :-
+-- This statement sets the session's ANSI_NULLS option to ON. 
+-- When ANSI_NULLS is ON, comparisons against NULL values use the ANSI SQL standard behavior, 
+-- where NULL is considered to be different from any other value, including another NULL. This ensures consistent behavior in SQL queries.
+
+
+-- SET QUOTED_IDENTIFIER ON :-
+-- This statement sets the session's QUOTED_IDENTIFIER option to ON. When QUOTED_IDENTIFIER is ON, 
+-- double quotation marks (") are used to delimit identifiers (such as table or column names), and single quotation marks (') are used to delimit string literals. 
+-- This is important for ensuring proper parsing of SQL statements, especially when dealing with identifiers that contain special characters or keywords.
+
+
+-- BEGIN :-
+-- This keyword marks the beginning of the stored procedure's body. Everything between BEGIN and END comprises the stored procedure's logic.
+-- =============================================
+========================= Basic Rules for define a store procedure =========================
+-- set a default value NULL for optional parameter
+-- YOU CAN NOT MODIFY THE STORE PROCEDURE IF YOU ADD THIS KEYWORD 'WITH ENCRYPTION'
+------------------------------------------------
+CREATE PROCEDURE PROCEDURE_NAME 
+WITH ENCRYPTION
+AS
+------------------------------------------------

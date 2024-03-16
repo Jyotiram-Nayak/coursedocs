@@ -4,17 +4,17 @@ started from playlist 29
 target upto playlist 40
 ====================
 
-Date:14-03-2024
+Date:16-03-2024
 
 Today's work update :-
-crud operation using asp.net core web api
-introduction identity framework
+Store procedure,
+Crud operation with ado.net in asp.net core using store srocedure
 
-In time:10:50 Am
-Out time:7:20 PM
+In time:08:00 Am
+Out time:4:20 PM
 
 Today's Learning hours: 8:00
-Current week total Learning hours:33:30
+Current week total Learning hours:49:30
 
 =================================================================
 --------------------------Websites-------------------------------

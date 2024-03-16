@@ -609,14 +609,38 @@ Steps
 ## Manage users, password, profile data, roles, tokens, email confirmation.
 ## And much more
 
+AJAX Method
+-------------------------------------------------------
+• The ajax) method is used to perform an AJAX (asynchronous HTTP) request.
+• It can call any action method of the controller.
+• It can pass values to action parameters from the view.
+• It can get the response from the action method and display it on the view.
+• All these actions happen without page reload.
+
+Syntax AJAX Method
+-------------------------------------------------------
+-- s.ajax( {
+-- type: 'POST', // http method 
+-- url: '@Url.Action("Add"), // URL to hit
+-- data: {num1: x, num2: y }, // data to submit
+-- dataType: 'text', 
+-- success: function (data, status, xhr) 
+--     alert(data);
+-- }, 
+-- error: function (req, textStatus, errorMessage) {
+--     alert(errorMessage);
+-- }
+
+
+
 Remember me
 -------------------------------------------------------
 JWT Token 
 xUnit
-AJAX jquery
+-- AJAX jquery 
 Validation
 
-SP
+-- SP
 Trigger
 View
 Case
