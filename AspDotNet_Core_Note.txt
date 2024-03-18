@@ -39,6 +39,9 @@ Error CS1061 'DbContextOptionsBuilder' does not contain a definition for 'UseSql
 
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ================================================================================
+
+========================================================================================================================================================
+
 ## Introduction
 -------------------------------------------------------
 • Nowadays, everyone is talking about open source, cross platform development.
@@ -64,11 +67,17 @@ Error CS1061 'DbContextOptionsBuilder' does not contain a definition for 'UseSql
 
 ## create project using CLI
 --------------------------
--- dotnet new list
 ## it will display some Template Name 
--- dotnet new mvc --name MyFirstWeb
-## hear in this Template Name is mvc 
+-- dotnet new list
+
+## in this example we use MVC Template
 ## after that write the project name as your choice
+-- dotnet new mvc --name MyFirstWeb
+
+## to run any project using cli type this
+-- dotnet watch
+or 
+-- dotnet run
 
 
 Add migration
@@ -87,9 +96,21 @@ How to Create a SQLite Database with Entity Framework Core in an ASP.NET Core MV
 -------------------------------------------------------
 # Update SDK in csproj
 # Update output type in csproj
-# Add bew WbHostBuilder
+# Add Web WebHostBuilder
 # Add routing
 # Setup default route
+
+
+## CreateDefaultBuilder
+-------------------------------------------------------
+-- Dependency Injection (DI)
+-- Configuration
+-- appSettings.json
+-- appSettings.{env}.json
+-- User secrets
+-- Environment variables
+
+========================================================================================================================================================
 
 ## Route (two type of  routing)
 -------------------------------------------------------
@@ -133,11 +154,47 @@ public IActionResult Index()         ## Action Method
 [action]  ## Token for Action
 ## we can use both token together
 
+## Route constraints
+## Type: int, bool, datetime, double, float etc
+## Min: min(number)                 ## minimum value that require
+## Max: max(number)                 ## maximum value that require
+## MinLength: minlength(10)
+## MaxLength: maxlength(20)
+## Length: length (15)
+## Range: range(10,15)
+## Alpha: alpha, There must only be the alphabetical character.  ## must be alfabetic character require
+## Required: required
+## Regex: regex(expression)
+-- [Route("{name:regex(a(b|c))}")]
+
+
+## by default parameter value are string
+ 
+
+## example
+-------------------------------------------------------
+-- [Route("{id:int:min(10):max(100)}")]
+-- public string SelectAllEmployee(int id)
+-- {
+--     return "Employees id is " + id;
+-- }
+-- [Route("{name}")]
+-- public string SelectAllEmployee(string name)
+-- {
+--     return "Employees name is "+ name;
+-- }
+-- [Route("{name:regex(a(b|c))}")]
+-- public string getByRegex(string name)
+-- {
+--     return "Employees name is " + name;
+-- }
+-------------------------------------------------------
 
 ## http Methods
 -------------------------------------------------------
 ## Map method is use for genral perpose all type of http request
 
+========================================================================================================================================================
 
 ## Passing Data from Controller to View using object
 -------------------------------------------------------
@@ -609,6 +666,8 @@ Steps
 ## Manage users, password, profile data, roles, tokens, email confirmation.
 ## And much more
 
+========================================================================================================================================================
+
 AJAX Method
 -------------------------------------------------------
 • The ajax) method is used to perform an AJAX (asynchronous HTTP) request.
@@ -630,6 +689,107 @@ Syntax AJAX Method
 -- error: function (req, textStatus, errorMessage) {
 --     alert(errorMessage);
 -- }
+
+========================================================================================================================================================
+
+## WEB API
+## Status Code
+-------------------------------------------------------
+• Status code are issued from the server and they gives the information about the responses.
+• All HTTP response status code are divided into five (5) categories.
+• 1xx - Informational response
+• 2xx - Successful
+• 3xx - Redirection
+• 4xx - Client error
+• 5xx - Server error
+
+## Frequently used Status code
+-------------------------------------------------------
+• 200 OK
+• 201 New Resource created
+- 204 No content (The server processed the request successfully and it is not returning any content)
+• 301 Moved permanently
+• 302 Moved temporarily
+• 400 Bad request
+• 401 Unauthorized
+• 404 Not found
+• 405 Method not allowed
+• 500 Internal server error
+• 503 Service unavailable (ex - down for maintenance)
+
+
+## constraints for RESTful API
+-------------------------------------------------------
+## RESTful Get URLS
+----------------------------
+## Gets a list of all the employees
+-- Get + domain.com/employees
+## Gets the details of a single employee
+-- Get + domain.com/employees/{employeeld}
+## Gets the account details of a single employee
+-- Get + domain.com/employees/{emploveeld}//accounts
+## Gets the single account details of a single employee
+-- Get + domain.com/employees/{employeeld}/accounts/{accountld}
+
+## RESTful Post URLS
+----------------------------
+## Body: Employee object
+## Adds a new employee
+-- Post + domain.com/employees
+
+## Body: Account object
+## Adds a new account for the employee
+-- Post + domain.com/employees/{employeeld}/accounts
+
+
+## RESTful Put URLS
+----------------------------
+## Body: Employee object
+## Updated the employee
+-- Put + domain.com/employees/{employeeld}
+
+## Body: Account object
+## Updates the specific account for a specific employee
+-- Put + domain.com/employees/{employeeld}/accounts/{accountld}
+
+## RESTful Delete URLS
+----------------------------
+## Deletes the employee
+-- Delete + domain.com/employees/{employeeld}
+
+## Deletes the specific account for a specific employee
+-- Delete + domain.com/employees/{employeeld//accounts/{account/d}
+
+========================================================================================================================================================
+
+## Use of SQL Server
+-------------------------------------------------------
+• SQL Server is a DBMS and provide the complete environment to save and work with the data of application.
+• SQL Server stores the data in form of tables.
+• We can also create relationship in between the tables.
+• You can use SQL Server from any other server or from your local system.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
