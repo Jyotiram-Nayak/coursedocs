@@ -1,12 +1,9 @@
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 =====================Website Links=====================
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 dotNet Community
 https://dotnet.microsoft.com/en-us/platform/community
 https://aka.ms/ef-core-connection-strings
 
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-
+========================================================================================================================================================
 
 program.cs
 ================================================================================
@@ -22,24 +19,27 @@ example
 -- add services 
 -- middleware
 -- dipendency injector
-
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+========================================================================================================================================================
 =====================ERROR======================
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 Severity Code Description Project File Line Suppression State  in dotnet core 8 
 Error CS1061 'DbContextOptionsBuilder' does not contain a definition for 'UseSqlServer' and no accessible extension method 'UseSqlServer' accepting a first argument of type 'DbContextOptionsBuilder' could be found (are you missing a using directive or an assembly reference?)
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ====================SOLUTION====================
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ## Run the following command in the NuGet Package Manager Console:
 -- Install-Package Microsoft.EntityFrameworkCore.SqlServer 
 
 ## Make sure you have the correct using directive for Entity Framework Core
 ## using Microsoft.EntityFrameworkCore;
 
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ================================================================================
 
+========================================================================================================================================================
+## Keybord shortcuts visual studio 2022
+-------------------------------------------------------
+CTRL + M plus CTRL + O to collapse all regions non-recursively
+CTRL + K plus CTRL + D to code formating
+CTRL + K plus CTRL + C to comment any line
+CTRL + K plus CTRL + U to uncomment any line
+CTRL + SHIFT + A to add new item 
 ========================================================================================================================================================
 
 ## Introduction
@@ -758,7 +758,98 @@ Syntax AJAX Method
 -- Delete + domain.com/employees/{employeeld}
 
 ## Deletes the specific account for a specific employee
--- Delete + domain.com/employees/{employeeld//accounts/{account/d}
+-- Delete + domain.com/employees/{employeeld}//accounts/{account/d}
+
+========================================================================================================================================================
+
+## model binder
+-------------------------------------------------------
+• URL
+    • Route
+    • Query string
+• Header
+• Body
+• Form-Data
+• etc.
+• The process of binding the HTTP Request data to the parameters of
+application Controllers or Properties is known as Model Binding.
+• There are lots of built-in methods and attributes for model binder.
+• We can also create the custom model binder.
+
+## [BindProperty] is use to bind property(or model property) with controller
+## example
+--------------------
+-- [BindProperty]
+-- public StudentModel Student{ get; set; }
+-- [HttpPost]
+-- public IActionResult AddStudent()
+-- {
+--     return Ok($"Id = {Student.Id},"+ $"Name = {Student.Name},"+$"Gender = {Student.Gender},");
+-- }
+
+-- [BindProperty(SupportsGet=true)]  ## for allow get request
+
+## BindProperties
+-------------------------------------------------------
+## BindProperties is an attribute and it is used to map the incoming form-data to the public properties.
+## BindProperties works on simple (int, string, etc) and complex data objects.
+## By default the BindProperties does not work for HTTPGET request.
+## BindProperties is applied on the controller level.
+
+## the order of passing data using querie string is doesn't metter
+
+## [FromQuery]
+-------------------------------------------------------
+## The FromQuery attribute is used to bind the data available in query string.
+## THE [FromQuery] attribute force to bind  the data only from query string
+## Example: http://localhost:8700/api/countries?name=India&area=30
+
+## [FromRoute]
+-------------------------------------------------------
+## The FromRoute attribute is used to bind the data available in route (URL).
+## THE [FromRoute] attribute force to bind  the data only from route
+## Example: htto://localhost:8700/api/emplovees/2/departments/3
+
+## we can also pass multiple attributes
+-- [HttpPost ("{id}" )]
+-- public IActionResult AddCountry([FromRoute]int id, [FromForm]CountryModel model)
+-- {
+--     return Ok($"Name = {model. Name}");
+-- }
+
+## same as other 
+-------------------------------------------------------
+-- [FromForm] 
+## THE [FromRoute] attribute force to bind  the data only from Form-data
+-- [FromHeader]
+## THE [FromRoute] attribute force to bind  the data only from Header
+
+## custom model binder
+-------------------------------------------------------
+## CustomBinder.cs
+-----------------------
+-- public class CustomBinder : IModelBinder
+-- {
+--     public Task BindModelAsync(ModelBindingContext bindingContext)
+--     {
+--         var data = bindingContext.HttpContext.Request.Query;
+--         var result = data.TryGetValue("states",out var states);
+--         if (result)
+--         {
+--             var myArray=states.ToString().Split(',');
+--             bindingContext.Result=ModelBindingResult.Success(myArray);
+--         }
+--         return Task.CompletedTask;
+--     }
+-- }
+
+## StateController.cs
+-----------------------
+-- [HttpGet]
+-- public IActionResult States([ModelBinder(typeof(CustomBinder))] string[] states)
+-- {
+--     return Ok(states);
+-- }
 
 ========================================================================================================================================================
 
@@ -769,36 +860,14 @@ Syntax AJAX Method
 • We can also create relationship in between the tables.
 • You can use SQL Server from any other server or from your local system.
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 Remember me
 -------------------------------------------------------
 JWT Token 
 xUnit
 -- AJAX jquery 
 Validation
+LINQ
+payment intigration
 
 -- SP
 Trigger

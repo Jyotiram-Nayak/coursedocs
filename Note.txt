@@ -4,17 +4,18 @@ started from playlist 29
 target upto playlist 40
 ====================
 
-Date:16-03-2024
+Date:19-03-2024
 
 Today's work update :-
-Store procedure,
-Crud operation with ado.net in asp.net core using store srocedure
+Return type status code 400,200,500,301,
+all bind attributes,
+custom ModelBinder,
 
-In time:08:00 Am
-Out time:4:20 PM
+In time:11:00 Am
+Out time:8:00 PM
 
-Today's Learning hours: 8:00
-Current week total Learning hours:49:30
+Today's Learning hours: 8:30
+Current week total Learning hours:17:00
 
 =================================================================
 --------------------------Websites-------------------------------
