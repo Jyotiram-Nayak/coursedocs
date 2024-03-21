@@ -4,18 +4,20 @@ started from playlist 29
 target upto playlist 40
 ====================
 
-Date:19-03-2024
+Date:12-03-2024
 
 Today's work update :-
-Return type status code 400,200,500,301,
-all bind attributes,
-custom ModelBinder,
+Singleton Service,
+Scoped service,
+Transient server,
+TryAddScoped, TryAddSingleton, TryAddTransient,
+Repository pattern api 
 
-In time:11:00 Am
-Out time:8:00 PM
+In time:11:50 Am
+Out time:8:30 PM
 
-Today's Learning hours: 8:30
-Current week total Learning hours:17:00
+Today's Learning hours: 8:00
+Current week total Learning hours:25:00
 
 =================================================================
 --------------------------Websites-------------------------------

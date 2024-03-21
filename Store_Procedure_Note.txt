@@ -39,7 +39,7 @@ BEGIN
 	SELECT <@Param1, sysname, @p1>, <@Param2, sysname, @p2>
 END
 GO
--- ============================================='
+-- =============================================
 -- SET ANSI_NULLS ON :-
 -- This statement sets the session's ANSI_NULLS option to ON. 
 -- When ANSI_NULLS is ON, comparisons against NULL values use the ANSI SQL standard behavior, 

@@ -485,12 +485,12 @@ public class StudentModel
 -- Scaffold-DbContext "server=DESKTOP-T68EB1A\SQLEXPRESS;database=Student;trusted_connection=true;TrustServerCertificate=True;" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Models
 // Server=DESKTOP-T68EB1A\SQLEXPRESS;Database=Student;Trusted_Connection=True;MultipleActiveResultSets=true;Encrypt=True;TrustServerCertificate=True;
 
-Scaffold-DbContext "server=DESKTOP-T68EB1A\SQLEXPRESS;database=EmployeeDB;trusted_connection=true;TrustServerCertificate=true;" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Models
+Scaffold-DbContext "server=DESKTOP-T68EB1A\SQLEXPRESS;database=BookStore;trusted_connection=true;TrustServerCertificate=true;" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Models
 ## If we update our database then how we can update our Model and DbContext.
 ## By using this command:
--- Scaffold-DbContext "server=ServerName;database=DatabaseName;trusted_connection=true" Microsoft.EntityFrameworkCore.Sq|Server -OutputDir Models -force
+-- Scaffold-DbContext "server=ServerName;database=DatabaseName;trusted_connection=true" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Models -force
 
-
+Scaffold-DbContext "Server=DESKTOP-T68EB1A\SQLEXPRESS;Database=BookStore;TrustedConnection=True;TrustServerCertificate=True;" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Models
 ## 3rd Step:
 ## Move Connection String from DbContext Class To appsettings.json file.
 
@@ -569,7 +569,30 @@ Steps
 
 ========================================================================================================================================================
 
+AJAX Method
+-------------------------------------------------------
+• The ajax) method is used to perform an AJAX (asynchronous HTTP) request.
+• It can call any action method of the controller.
+• It can pass values to action parameters from the view.
+• It can get the response from the action method and display it on the view.
+• All these actions happen without page reload.
 
+Syntax AJAX Method
+-------------------------------------------------------
+-- s.ajax( {
+-- type: 'POST', // http method 
+-- url: '@Url.Action("Add"), // URL to hit
+-- data: {num1: x, num2: y }, // data to submit
+-- dataType: 'text', 
+-- success: function (data, status, xhr) 
+--     alert(data);
+-- }, 
+-- error: function (req, textStatus, errorMessage) {
+--     alert(errorMessage);
+-- }
+========================================================================================================================================================
+------------------------------------------------------------------------WEB API-------------------------------------------------------------------------
+========================================================================================================================================================
 ## Api (Application Programming Interface)
 -------------------------------------------------------
 ## As per Wikipedia's Definition of API: In computer programming, (API) is a set of subroutine definitions, 
@@ -666,33 +689,9 @@ Steps
 ## Manage users, password, profile data, roles, tokens, email confirmation.
 ## And much more
 
-========================================================================================================================================================
 
-AJAX Method
--------------------------------------------------------
-• The ajax) method is used to perform an AJAX (asynchronous HTTP) request.
-• It can call any action method of the controller.
-• It can pass values to action parameters from the view.
-• It can get the response from the action method and display it on the view.
-• All these actions happen without page reload.
-
-Syntax AJAX Method
--------------------------------------------------------
--- s.ajax( {
--- type: 'POST', // http method 
--- url: '@Url.Action("Add"), // URL to hit
--- data: {num1: x, num2: y }, // data to submit
--- dataType: 'text', 
--- success: function (data, status, xhr) 
---     alert(data);
--- }, 
--- error: function (req, textStatus, errorMessage) {
---     alert(errorMessage);
--- }
 
 ========================================================================================================================================================
-
-## WEB API
 ## Status Code
 -------------------------------------------------------
 • Status code are issued from the server and they gives the information about the responses.
@@ -771,8 +770,7 @@ Syntax AJAX Method
 • Body
 • Form-Data
 • etc.
-• The process of binding the HTTP Request data to the parameters of
-application Controllers or Properties is known as Model Binding.
+• The process of binding the HTTP Request data to the parameters of application Controllers or Properties is known as Model Binding.
 • There are lots of built-in methods and attributes for model binder.
 • We can also create the custom model binder.
 
@@ -808,9 +806,11 @@ application Controllers or Properties is known as Model Binding.
 -------------------------------------------------------
 ## The FromRoute attribute is used to bind the data available in route (URL).
 ## THE [FromRoute] attribute force to bind  the data only from route
-## Example: htto://localhost:8700/api/emplovees/2/departments/3
+## Example: htto://localhost:8700/api/employees/2/departments/3
 
 ## we can also pass multiple attributes
+## controller.cs
+-------------------------
 -- [HttpPost ("{id}" )]
 -- public IActionResult AddCountry([FromRoute]int id, [FromForm]CountryModel model)
 -- {
@@ -826,6 +826,7 @@ application Controllers or Properties is known as Model Binding.
 
 ## custom model binder
 -------------------------------------------------------
+## example 1
 ## CustomBinder.cs
 -----------------------
 -- public class CustomBinder : IModelBinder
@@ -851,7 +852,215 @@ application Controllers or Properties is known as Model Binding.
 --     return Ok(states);
 -- }
 
+## example 2
+-------------------------------------------------------
+## CustomBinderStateDetails.cs
+-----------------------
+public class CustomBinderStateDetails : IModelBinder
+{
+    public Task BindModelAsync(ModelBindingContext bindingContext)
+    {
+        var modelName= bindingContext.ModelName;
+        var value = bindingContext.ValueProvider.GetValue(modelName);
+        var result = value.FirstValue;
+
+        if(!int.TryParse(result,out var id))
+        {
+            return Task.CompletedTask;
+        }
+
+        var model = new StateModel()
+        {
+            Id = id,
+            Name = "Gujrat",
+            Population = 5000
+        };
+
+        bindingContext.Result = ModelBindingResult.Success(model);
+        return Task.CompletedTask;
+    }
+}
+
+## StateController.cs
+-----------------------
+-- [HttpGet("{id}")]
+-- public IActionResult GetStateDetails([ModelBinder(Name="Id")]StateModel state)
+-- {
+--     return Ok(state);
+-- }
 ========================================================================================================================================================
+## Dependency Injection
+-------------------------------------------------------
+## The main concept behind Dependency Injection (DI) is to implement IOC (Inversion of control).
+## IOC means to have loosely coupling in the code.
+## Unit Testing
+
+## How to configure the DI
+-------------------------
+## Asp. Net Core framework provides the built-in support for DI.
+## Dependency are registered in containers, and the container in asp.net core is IServiceProvider.
+## Services are registered in the Startup.ConfigureServices method of the application.
+
+## LifeTime of Services in DI
+-------------------------
+## Singleton
+## Scoped
+## Transient
+
+## Singleton
+-------------------------------------------------------
+## Singleton services can be registered using AddSingleton<> method.
+## There will be only one instance of the Singleton service throughout the application.
+## The instance of the Singleton service will be create at every time when we restart an application
+
+## example
+-------------------------
+## IStudentRepository
+-------------------------
+-- public interface IStudentRepository
+-- {
+--     int AddStudent(StudentModel student);
+--     List<StudentModel> GetStudents();
+-- }
+
+## StudentRepository.cs
+-------------------------
+-- public class StudentRepository : IStudentRepository
+-- {
+--     private List<StudentModel> students = new List<StudentModel>();
+--     public List<StudentModel> GetStudents() { return students; }
+--     public int AddStudent(StudentModel student)
+--     {
+--         student.Id = students.Count + 1;
+--         students.Add(student);
+--         return student.Id;
+--     }
+-- }
+
+## StudentCOntroller.cs
+-------------------------
+-- public IActionResult AddStudent(StudentModel student)
+-- {
+--     _studentRepository.AddStudent(student);
+--     List<StudentModel> students = _studentRepository.GetStudents();
+--     return Ok(students);
+-- }
+
+## program.cs
+-------------------------
+-- builder.Services.AddSingleton<IStudentRepository, StudentRepository>();  ## Dependency Injection
+
+## Scoped
+-------------------------------------------------------
+## Scoped services can be registered using AddScoped<> method.
+## A new instance of the service will be created for every new HTTP Request.
+## if you create multiple instances then both of they have the same instance for the same HttpRequest
+## they can interact with each other for the same HttpRequest
+
+## program.cs
+-------------------------
+-- builder.Services.AddScoped<IStudentRepository, StudentRepository>();  ## Dependency Injection
+
+## Transient
+-------------------------------------------------------
+## Transient services can be registered using AddTransient<> method.
+## A new instance of the service will be created every-time it is requested.
+## Example: Lets say Controller A is using a Transient service S 3 times in same HTTP Request, then there will be 3 separate instances of this S service.
+
+## if you create multiple instances then both of they have there different instance
+## they cann't interact with each other
+
+## program.cs
+-------------------------
+-- builder.Services.AddTransient<IStudentRepository, StudentRepository>();  ## Dependency Injection
+
+## TryAddScoped, TryAddSingleton, TryAddTransient
+-------------------------------------------------------
+## If we are registering the dependency using AddScoped, AddSingleton or AddTransient method then they will replace the 
+    service in the collection if it has already been registered in the container.
+## Now If we use the Try version like TryAddScoped then it will only register the service if it was not registered earlier. 
+    In case service was already registered then the TryAddScoped will skip the registration for that service.
+
+## we can resolve the dependency directly at the action method 
+## to do that we use [FromService] attribute at the parameter
+## example
+-------------------------
+-- [HttpGet("")]
+-- public IActionResult GetName([FromServices] IProductRepository _productRepository)
+-- {
+--     var name = _productRepository.GetName();
+--     return Ok(name);    
+-- }
+========================================================================================================================================================
+## What is Entity Framework Core
+-------------------------------------------------------
+## Entity Framework Core is an Open-source framework from Microsoft that works as a bridge in between the application and the database.
+## The Entity framework Core is compatible with any dot net application and any RDBMS.
+## Entity framework Core is the Microsoft's official technology to interact with the RDBMS.
+
+How Entity Framework Core works
+-------------------------------------------------------
+## Entity Framework Core is an O/RM and works on the object-oriented perspective.
+## This means all the tables are converted into C# classes and the corresponding columns are converted as the properties of the classes
+
+========================================================================================================================================================
+## HTTP Patch installation
+-------------------------------------------------------
+## nned to install this two package to use http patch method
+## the patch method is use to update only specific column in the database it dont update all column by default
+-- dotnet add package Microsoft.AspNetCore.JsonPatch
+-- dotnet add package Microsoft.AspNetCore.Mvc.NewtonsoftJson
+
+
+
+## AutoMapper
+-------------------------------------------------------
+step 1 : install AutoMapper.Extensions.Microsoft.DependencyInject package from NuGet Package manager
+-- dotnet add package AutoMapper.Extensions.Microsoft.DependencyInject 
+
+step 2 : add service in program.cs
+-- builder.Services.AddAutoMapper(typeof(Program));
+
+step 3 : create mapper profile globally or use at the method        ## here we use globally
+-- create a folder and add a class in it
+
+step 4 : inherit that class from Profile which is available in AutoMapper namespace
+step 5 : create a constructor and initialize field
+step 6 : create CreateMapper to map model
+-- CreateMap<Books,BookModel>();
+
+step 7 : map where you want to return
+-- _mapper.Map<List<BookModel>>(books);
+## here 'BookModel' is return type and 'books' is type witch we want to map
+
+
+## Identity Core
+-------------------------------------------------------
+• Identity Core is an open-source framework and supported by Microsoft.
+• Identity Core has everything that is required to work with the authentication and authorization including
+• Signup, Login, Change Password, Forgot Password
+• Multi factor authentication
+• Login with third party app like Google, Facebook, Microsoft etc
+
+
+## Steps to use identity framework
+-------------------------------------------------------
+step 1 : install Microsoft.AspNetCore.Identity.EntityFrameworkCore package from NuGet package manager
+-- dotnet add package Microsoft.AspNetCore.Identity.EntityFrameworkCore 
+step 2 : create a new BookStoreUser class in model folder and inherit from IdentityUser             ## you want to use only default properties
+step 3 : create properties is you require to add any ## you don't need to create a class if         ## skip this two step '2' and '3' 
+step 4 : inherit your DBContext class from IdentityDbContext and pass User class in it
+-- example BookStoreDBContext:IdentityDbContext<BookStoreUser>
+step 5 : add identity services in program.cs file
+-- builder.Services.AddIdentity<BookStoreUser, IdentityRole>().AddEntityFrameworkStores<BookStoreDBContext>().AddDefaultTokenProviders();
+step 6 : create a 'AccountRepository' repository for account and create 'IAccountRepository' interface also 
+step 7 : register services into 'program.cs' file pipeline 
+step 8 : create controller 'AccountController'
+step 9 : create SignupModel class for get require propertices
+
+
+
+
 
 ## Use of SQL Server
 -------------------------------------------------------
@@ -868,7 +1077,7 @@ xUnit
 Validation
 LINQ
 payment intigration
-
+consume web api
 -- SP
 Trigger
 View
