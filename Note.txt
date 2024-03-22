@@ -4,20 +4,17 @@ started from playlist 29
 target upto playlist 40
 ====================
 
-Date:12-03-2024
+Date:22-03-2024
 
 Today's work update :-
-Singleton Service,
-Scoped service,
-Transient server,
-TryAddScoped, TryAddSingleton, TryAddTransient,
-Repository pattern api 
+Identity framewor signup,
+signin ,JWT token,
 
-In time:11:50 Am
-Out time:8:30 PM
+In time:11:00 Am
+Out time:7:30 PM
 
 Today's Learning hours: 8:00
-Current week total Learning hours:25:00
+Current week total Learning hours:41:00
 
 =================================================================
 --------------------------Websites-------------------------------
