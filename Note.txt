@@ -4,17 +4,17 @@ started from playlist 29
 target upto playlist 40
 ====================
 
-Date:22-03-2024
+Date:27-03-2024
 
 Today's work update :-
-Identity framewor signup,
-signin ,JWT token,
+Role based authentication
+Email sending using smtp
 
-In time:11:00 Am
-Out time:7:30 PM
+In time:11:30 Am
+Out time:8:00 PM
 
 Today's Learning hours: 8:00
-Current week total Learning hours:41:00
+Current week total Learning hours:16:30
 
 =================================================================
 --------------------------Websites-------------------------------
@@ -25,6 +25,8 @@ Neumorphism.io - https://neumorphism.io/#e0e0e0
 Tostify react - https://fkhadra.github.io/react-toastify/introduction/
 https://lucasbassetti.com
 
+## website for get udemy course at free of cost 
+-- https://www.discudemy.com/?ref
 
 
 
