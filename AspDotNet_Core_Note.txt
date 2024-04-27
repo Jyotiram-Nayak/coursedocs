@@ -1,3 +1,40 @@
+## Folder Structure
+-----------------------------
+LibraryManagementSystem/
+│
+├── LibraryManagementSystem.DataAccess/          <-- Data Access Layer
+│   ├── Repositories/
+│   │   ├── IBookRepository.cs
+│   │   ├── BookRepository.cs
+│   │   ├── IAuthorRepository.cs
+│   │   ├── AuthorRepository.cs
+│   │   ├── IMemberRepository.cs
+│   │   ├── MemberRepository.cs
+│   │   ├── ... // Other repositories
+│   │   
+│   ├── LibraryDbContext.cs                        <-- Entity Framework DbContext
+│
+├── LibraryManagementSystem.Services/            <-- Business Logic Layer
+│   ├── Services/
+│   │   ├── IBookService.cs
+│   │   ├── BookService.cs
+│   │   ├── IAuthorService.cs
+│   │   ├── AuthorService.cs
+│   │   ├── IMemberService.cs
+│   │   ├── MemberService.cs
+│   │   ├── ... // Other services
+│
+├── LibraryManagementSystem.API/                 <-- Presentation Layer (Web API)
+│   ├── Controllers/
+│   │   ├── BooksController.cs
+│   │   ├── AuthorsController.cs
+│   │   ├── MembersController.cs
+│   │   ├── ... // Other controllers
+│   │
+│   ├── Startup.cs                                <-- Configure services and middleware
+│   ├── appsettings.json                          <-- Configuration settings
+│   ├── Program.cs                                <-- Entry point
+
 =====================Website Links=====================
 dotNet Community
 https://dotnet.microsoft.com/en-us/platform/community
@@ -480,7 +517,7 @@ public class StudentModel
 -- Scaffold-DbContext "server=DESKTOP-T68EB1A\SQLEXPRESS;database=Student;trusted_connection=true;TrustServerCertificate=True;" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Models
 // Server=DESKTOP-T68EB1A\SQLEXPRESS;Database=Student;Trusted_Connection=True;MultipleActiveResultSets=true;Encrypt=True;TrustServerCertificate=True;
 
-Scaffold-DbContext "server=DESKTOP-T68EB1A\SQLEXPRESS;database=BookStore;trusted_connection=true;TrustServerCertificate=true;" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Models
+Scaffold-DbContext "server=DESKTOP-T68EB1A\SQLEXPRESS;database=Lib-management;trusted_connection=true;TrustServerCertificate=true;" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Models
 ## If we update our database then how we can update our Model and DbContext.
 ## By using this command:
 -- Scaffold-DbContext "server=ServerName;database=DatabaseName;trusted_connection=true" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Models -force
@@ -1019,7 +1056,7 @@ step 2 : add service in program.cs
 -- builder.Services.AddAutoMapper(typeof(Program));
 
 step 3 : create mapper profile globally or use at the method        ## here we use globally
--- create a folder and add a class in it
+-- create a folder(Mapper) and add a class in it
 
 step 4 : inherit that class from Profile which is available in AutoMapper namespace
 step 5 : create a constructor and initialize field
@@ -1027,6 +1064,13 @@ step 6 : create CreateMapper to map model
 -- CreateMap<Books,BookModel>();
 
 step 7 : map where you want to return
+## to use the Map function you have to inject constructor injection IMapper instance
+-- private readonly IMapper _mapper;
+-- public BookRepository(BookStoreDBContext context,IMapper mapper)
+-- {
+--     _mapper = mapper;
+-- }
+## now use this method 
 -- _mapper.Map<List<BookModel>>(books);
 ## here 'BookModel' is return type and 'books' is type witch we want to map
 
@@ -1237,9 +1281,10 @@ namespace BookStore.Model
 {
     public class EmailMessage
     {
-        public string ToEmails { get; set; }
+        public List<string> ToEmails { get; set; }
         public string Subject { get; set; }
         public string Body { get; set; }
+        public List<KeyValuePair<string, string>> PlaceHolders { get; set; }  
     }
 }
 
@@ -1297,12 +1342,13 @@ namespace BookStore.Model
 --             From = new MailAddress(_smtpconfig.SenderEmail, _smtpconfig.SenderName),
 --             IsBodyHtml = _smtpconfig.IsBodyHTML
 --         };
---         //// for multiple email sending
---         //foreach(var toEmail in emailMessage.ToEmails)
---         //{
---         //    mailMessage.To.Add(toEmail);
---         //}
---         mailMessage.To.Add(emailMessage.ToEmails);
+--         // for multiple email sending
+--         foreach(var toEmail in emailMessage.ToEmails)
+--         {
+--             mailMessage.To.Add(toEmail);
+--         }
+--         // for single mail
+--         // mailMessage.To.Add(emailMessage.ToEmails);
 --         NetworkCredential networkCredential = new NetworkCredential(_smtpconfig.SmtpUsername, _smtpconfig.SmtpPassword);-- 
 --         SmtpClient smtpClient = new SmtpClient
 --         {

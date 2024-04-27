@@ -1,0 +1,625 @@
+Here are a few suggestions for project names:
+
+UniPlacementHub
+CareerForge
+EduOpportunityPortal
+JobConnectED
+CampusCareers
+EduCareersHub
+CareerLeapED
+CampusPlacementPro
+EduJobConnect
+StudentCareerHub
+
+
+use multer for image upload
+
+
+
+packages installed
+---------------------------
+Microsoft.EntityFrameworkCore.SqlServer
+Microsoft.EntityFrameworkCore.Design
+Microsoft.EntityFrameworkCore.Tools
+
+
+module
+-----------------
+-- SuperAdmin ( optional ) for future update
+University
+Student
+Company
+
+User (IdentityUser)
+-----------------
+FullName
+Image
+
+University
+-----------------
+Company
+-----------------
+
+public string IsApprove {get;set;}
+public string Image {get;set;}
+public string Location {get;set;}
+public string Website {get;set;}
+public string CreateOn {get;set;}
+public string UpdateOn {get;set;}
+
+public string Email { get; set; } = string.Empty;
+public string Password { get; set; } = string.Empty;
+public string ConfirmPassword { get; set; } = string.Empty;
+public string Role { get; set; } = string.Empty;
+public string Image { get; set; } = string.Empty;
+
+my project is campus requerment management system 
+there are 4 module 
+Admin,University,company,student
+
+========================================================================================================================================
+-----------------------------------------------------------------Tables-----------------------------------------------------------------
+========================================================================================================================================
+User (IdentityUser)
+-----------------
+FullName
+IsApprove
+Image
+
+UserId
+Email
+Location
+Contact
+Website
+
+University
+-----------------
+UniversityID
+UserId
+Name
+Email 
+Location
+Description
+Website 
+ICollection<UniversityCompany> UniversityCompanies
+
+Company
+-----------------
+CompanyId
+UserId
+Name
+Email
+Location
+Contact
+Website
+ICollection<UniversityCompany> UniversityCompanies
+
+
+
+Student
+-----------------
+StudentId
+Name
+Email
+Dob
+Gender
+MaritalStatus
+joiningDate
+GraduationDate
+AdminUserId
+
+
+Job Table
+-----------------
+
+public Guid Id { get; set; }
+public Guid CompanyId { get; set; }
+public string Title { get; set; }
+public string Description { get; set; }
+public DateTime PostedDate { get; set; }
+public DateTime Deadline { get; set; }
+public File Document { get; set; }
+
+
+
+Employment : Type Internship + Full-Time
+Location : PAN India
+Cost to Company(CTC): INR 6,00,000 - INR 8,00,000
+Stipend : INR 15,000 - INR 20,000
+Description :
+Internship Program offering:
+1. 6 months of full-time internship
+2. Stipend of INR 15,000 for first 3 Months/ Last 3 Months - INR 20,000
+3. Certificate on Completion of the Internship
+4. Job Offer (Performance-based and on successful completion of Internship)
+5. PPO, which we will offer between 6 to 8 LPA (Performance Based)
+
+
+
+
+
+
+
+
+
+Job Application 
+-----------------
+ApplicationId (or JobApplicationId): A unique identifier for each application.
+JobId: The identifier of the job posting to which the application belongs.
+StudentId: The identifier of the student who is applying for the job.
+CompanyID (Foreign Key referencing )
+UniversityID (Foreign Key referencing )
+AppliedDate: The date and time when the student submitted the application.
+InterviewDate : 
+Status: The status of the application (e.g., submitted, under review, accepted, rejected).
+Resume: A file or link to the student's resume or application materials.
+AdditionalInformation: Any additional information provided by the student.
+CreateOn: The date and time when the application was created.
+UpdateOn: The date and time when the application was last updated.
+
+
+========================================================================================================================================
+---------------------------------------------------------------University---------------------------------------------------------------
+========================================================================================================================================
+Admin:
+
+Dashboard: 
+In this section, admin can see all detail in brief like Total Company Registered, Total User (Candidates) Registered and Total Vacancy Listed.
+
+Total Registered Company:
+In this section, admin can view detail of the registered company.
+
+Total Registered Users: 
+In this section, admin can view detail of users.
+
+Pages: In this section, the admin can manage about us and contact us pages.
+
+Reports: In this section admin can view how many companies have been registered in a particular period and also view how many vacancy 
+counts listed by a particular company in particular periods.
+
+Admin can also update his profile, change the password and recover the password.
+
+
+Student Management:
+
+Adding new students to the system.
+Managing student profiles, including personal information and academic records.
+Approving or rejecting student job applications.
+Job Placement:
+
+Providing a platform for companies to apply for campus placements within the university.
+Managing job postings and placements, including details such as job descriptions, requirements, and salary offers.
+Communication:
+
+Facilitating communication between students and companies regarding job opportunities and application statuses.
+Handling inquiries and messages from students or companies related to job placements.
+Administrative Tasks:
+
+Managing administrative tasks related to the university's involvement in campus placements.
+Providing administrative access to university staff or administrators to oversee and manage the CRMS platform.
+Data Analysis and Reporting:
+
+Analyzing job placement data, including application trends, placement rates, and student-company interactions.
+Generating reports to evaluate the effectiveness of campus placement activities and identify areas for improvement.
+
+
+
+add student 
+activate/deactivate student
+
+
+
+
+
+========================================================================================================================================
+----------------------------------------------------------------Student-----------------------------------------------------------------
+========================================================================================================================================
+Student Menu (pajes) 
+-----------------
+Home
+Jobs
+Messages
+Forums
+People
+Assessments
+Practice Tests
+Resumes
+
+Home Page: 
+Users can see the latest job posted on the home page.
+
+About Us: 
+Users can view about us page.
+
+Listed Jobs: 
+User can view total listed jobs.
+
+Contact us: 
+Users can view the contact us page.
+
+User Dashboard: 
+After click on this user can do the following activities
+View his/her  applied(Today’s applied jobs, Yesterday applied for jobs, Last seven days applied jobs and total applied jobs)
+Fill Educations forms: In this section, user can fill his/her own education details.
+
+View Vacancy: 
+In this section, user views the vacancy of companies and applies for the jobs.
+History of Applied Jobs: In this section, user can view his/her own applied job and see the response of companies.
+
+Reports: 
+In this sections, user can view his/her applied jobs in a particular period.
+
+Search Jobs: 
+In this section, user can search for jobs according to job titles.
+Users can also update his/her own profile, change the password, see notification messages of companies and recover the password.
+
+========================================================================================================================================
+-----------------------------------------------------------------Company----------------------------------------------------------------
+========================================================================================================================================
+Dashboard: 
+In this section, company can see all detail in brief like Total Number of applications received, Total number of new applications, Total number selected application, Total number of rejected applications.
+
+Post Vacancy: 
+In this section, company can manage job posting (Add/Manage).
+
+Job Application: 
+In this section, company can view total new applications receive, total sorted applications and total rejected applications and the company also have the right to sort application and reject the application and this selected and rejected message send to candidates.
+
+Reports: 
+In this section, company can view job posting in particular periods and also see how many application has been received in a particular period.
+A company can also update his/her company profile, change the password, see the notifications of new applications received and recover the password.
+
+===============================================================
+------------------------Authenticatio--------------------------
+===============================================================
+Task<IdentityResult> RegisterUserAsync(RegisterRequest registerRequest);
+Task<SignInResult> LoginAsync(LoginRequest loginRequest);
+Task<IdentityResult> ConfirmEmail(string uid, string token);
+Task<IdentityResult> ChangePasswordAsync(ChangePasswordRequest changePassword);
+
+-- Task<IdentityResult> ForgetPasswordAsync();
+
+
+===============================================================
+--------------------------Student------------------------------
+===============================================================
+Task<List<StudentResponse>> GetStudentAsync(string? userId);
+Task<IdentityResult> AddStudent(StudentRequest studentRequest);
+Task<IdentityResult> DeleteStudent(string id);
+
+-- Task<IdentityResult> UpdateStudent(string id,StudentRequest studentRequest);
+
+
+===============================================================
+---------------------Placement Application---------------------
+===============================================================
+Task<int> AddApplication(string universityId);
+Task<bool> ApproveOrRejectApplicationAsync(string applicationId, ApplicationStatus status);
+
+
+
+pending task
+-----------------------------
+(userRole == UserRoles.University ? PlacementApplication.CompanyId : PlacementApplication.UniversityId)
+
+
+
+
+
+
+        Task<IdentityResult> UpdateStudentAsync(Guid studentId, StudentRequest studentRequest);
+
+         public async Task<IdentityResult> UpdateStudentAsync(Guid studentId, StudentRequest studentRequest)
+ {
+     var student = await _userManager.FindByIdAsync(studentId.ToString());
+     if (student == null) { return IdentityResult.Failed(new IdentityError { Description = $"Student with ID '{studentId}' not found." }); }
+     student.FirstName = studentRequest.FirstName;
+     student.LastName = studentRequest.LastName;
+     student.IsApproved = true;
+     student.Address = studentRequest.Address;
+     student.Email = studentRequest.Email;
+     student.UserName = studentRequest.Email;
+     student.UpdateOn = DateTime.Now;
+
+     var updateResult = await _userManager.UpdateAsync(student);
+     if (!updateResult.Succeeded) { return IdentityResult.Failed(new IdentityError { Description = $"Failed to update student with Name '{student.FirstName}'." }); }
+     var stdDetails = await _context.Students.Where(s => s.UserId == student.Id).FirstOrDefaultAsync();
+     if (stdDetails == null) { return IdentityResult.Failed(new IdentityError { Description = $"Student details not found for user ID '{student.Id}'." }); }
+     stdDetails.RollNo = studentRequest.RollNo;
+     stdDetails.Dob = studentRequest.Dob;
+     stdDetails.Gender = studentRequest.Gender;
+     stdDetails.MaritalStatus = studentRequest.MaritalStatus;
+     stdDetails.JoiningDate = studentRequest.JoiningDate;
+     stdDetails.GraduationDate = studentRequest.GraduationDate;
+
+     var status = await _context.SaveChangesAsync();
+     if (status == 0)
+         return IdentityResult.Failed(new IdentityError { Description = $"Student with ID '{student.Id}' not found." });
+     return IdentityResult.Success;
+ }
+
+
+
+
+         [HttpPut("update-student/{studentId}")]
+        public async Task<IActionResult> UpdateStudent([FromRoute]Guid studentId,StudentRequest studentRequest)
+        {
+            var result = await _studentRepository.UpdateStudentAsync(studentId, studentRequest);
+            if (!result.Succeeded)
+            {
+                return BadRequest(new { success = false, message = "Failed to update Student.", data = result });
+            };
+            return Ok(new { success = true, message = "Student updated successfully...", data = result });
+        }
+
+
+
+
+        // try {
+        //   const response = await axios.post(
+        //     "https://localhost:44396/api/Account/register-user/",
+        //     values
+        //   );
+        //   console.log("Registration successful", response.data);
+        //   resetForm();
+        // } catch (error: any) {
+        //   if (error.response) {
+        //     console.error(
+        //       "Server Error:",
+        //       error.response.status,
+        //       error.response.data
+        //     );
+        //   } else if (error.request) {
+        //     console.error("No response received:", error.request);
+        //   } else {
+        //     console.error("Error:", error.message);
+        //   }
+        // }
+
+
+
+
+================================================================================== UserSlice ===============================================================================
+const { createSlice, createAsyncThunk } = require('@reduxjs/toolkit')
+const { default: axios } = require('axios')
+import { deleteCookie, setCookie,getCookie } from 'cookies-next'
+
+
+//base url for backend
+const BASE_URL = process.env.NEXT_PUBLIC_API_URL_OFFLINE
+
+//register new user
+export const userRegister = createAsyncThunk(
+	'userRegister',
+	async (val: object) => {
+		try {
+			const createUser = await axios.post(`${BASE_URL}/Account/register-user`, val)
+			return createUser.data
+		} catch (error: any) {
+			throw error.response.data
+		}
+	}
+)
+
+//login user
+export const userLogin = createAsyncThunk('userLogin', async (val: object) => {
+	try {
+        console.log(val);
+		const existingUser = await axios.post(`${BASE_URL}/Account/login-user`, val)
+		const data = await existingUser.data
+        console.log(data);
+		setCookie('token', data?.data?.token)
+		
+		return data
+	} catch (error: any) {
+		console.log(error);
+		throw error?.response?.data?.message
+	}
+})
+
+//get user information
+const userToken = getCookie('token')
+
+export const getUserProfile = createAsyncThunk('getUser', async () => {
+	try {
+		const existingUser = await axios.get(`${BASE_URL}/Account/get-user-profile`,
+        
+        { headers: { Authorization: `Bearer ${userToken}`} }
+        )
+		const data = await existingUser.data
+		return data.data
+	} catch (error: any) {
+		
+		throw error?.response?.data
+	}
+})
+
+//update user profile
+export const updateUserProfile = createAsyncThunk(
+	'updateUserProfile',
+	async (updatedata: object) => {
+		try {
+			const existingUser = await axios.patch('/user/update', updatedata)
+			const data = await existingUser.data
+			
+			return data
+		} catch (error: any) {
+			
+			throw error?.response?.data
+		}
+	}
+)
+
+
+
+//user initial state
+const initialState = {
+	user: [],
+	error: null,
+}
+
+//user slice
+const UserSlice = createSlice({
+	name: 'user',
+	initialState,
+	reducers: {
+		logout: (state: any, action: any) => {
+			state.user = null
+			state.error = null
+			deleteCookie('token')
+			deleteCookie('role')
+		},
+	},
+	extraReducers: (builder: any) => {
+		builder
+			.addCase(userRegister.pending, (state: any) => {
+				state.status = 'loading'
+				state.error = null
+			})
+			.addCase(userRegister.fulfilled, (state: any, action: any) => {
+				state.status = 'succeeded'
+			})
+			.addCase(userRegister.rejected, (state: any, action: any) => {
+				state.status = 'failed'
+				state.error = action.error.message
+			})
+			.addCase(userLogin.pending, (state: any) => {
+				state.status = 'loading'
+				state.error = null
+			})
+			.addCase(userLogin.fulfilled, (state: any, action: any) => {
+				state.status = 'succeeded'
+				// state.user = action.payload.data
+			})
+			.addCase(userLogin.rejected, (state: any, action: any) => {
+				state.status = 'failed'
+				state.error = action.error.message
+			})
+			.addCase(getUserProfile.pending, (state: any) => {
+				state.status = 'loading'
+				state.error = null
+			})
+			.addCase(getUserProfile.fulfilled, (state: any, action: any) => {
+				state.status = 'succeeded'
+			})
+			.addCase(getUserProfile.rejected, (state: any, action: any) => {
+				state.status = 'failed'
+				state.error = action.error.message
+			})
+			.addCase(updateUserProfile.pending, (state: any) => {
+				state.status = 'loading'
+				state.error = null
+			})
+			.addCase(updateUserProfile.fulfilled, (state: any, action: any) => {
+				state.status = 'succeeded'
+			})
+			.addCase(updateUserProfile.rejected, (state: any, action: any) => {
+				state.status = 'failed'
+				state.error = action.error.message
+			})
+			
+	},
+})
+
+export const { logout } = UserSlice.actions
+export default UserSlice.reducer
+================================================================================== UserSlice ===============================================================================
+================================================================================== store ===============================================================================
+import { configureStore, combineReducers } from '@reduxjs/toolkit'
+import UserSlice from '../UserSlice/UserSlice'
+import {
+	persistStore,
+	persistReducer,
+	FLUSH,
+	REHYDRATE,
+	PAUSE,
+	PERSIST,
+	PURGE,
+	REGISTER,
+} from 'redux-persist'
+import storage from 'redux-persist/lib/storage'
+
+
+//set presist configuration
+const persistConfig = {
+	key: 'root',
+	version: 1,
+	storage: storage,
+	
+}
+
+//combine all reducer
+const rootReducer: any = combineReducers({
+	user: UserSlice,
+    
+	
+})
+
+//set presistorReducer
+const persistedReducer = persistReducer(persistConfig, rootReducer)
+
+//export store
+export const store = configureStore({
+	reducer: persistedReducer,
+	middleware: (getDefaultMiddleware) =>
+		getDefaultMiddleware({
+			serializableCheck: {
+				ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+			},
+		}),
+})
+
+//export presistor
+export const persistor = persistStore(store)
+================================================================================== store ===============================================================================
+
+
+Work Done
+=======================================
+
+Admin module
+=======================================
+Login Page
+Registeration Page
+Profile
+-- Profile Setting
+
+company module
+=======================================
+Display University with apply
+Display Appliactions
+
+Uniersity module
+=======================================
+-- approve company
+-- reject company
+
+onClick={role === "University" ? () => onApproveReject(application.id) : undefined}
+
+Student module
+=======================================
+-- display all job posted by company
+-- apply on job
+
+need to update UI
+=======================================
+user profile
+
+
+
+need to update Backend
+=======================================
+user table
+-------------
+add city 
+add state 
+add bio
+
+
+
+Appliactions
+-------------
+add approved date
+add rejected date
+
+
