@@ -3,20 +3,18 @@ Today Target
 started from playlist 29
 target upto playlist 40
 ====================
-
-Date:25-04-2024
+Date:29-05-2024
 
 Today's work update :-
-create store ,
-use redux thunk,
-get student data,
-display in student table
+working on final demo
+some changes on frontend,
 
-In time:09:45 Am
-Out time:07:50 PM
 
-Today's Learning hours: 9:30
-Current week total Learning hours:34:30
+In time:11:24 Am
+Out time:07:30 PM
+
+Today's Learning hours: 08:00
+Current week total Learning hours:24:00
 
 =================================================================
 --------------------------Websites-------------------------------
@@ -263,3 +261,50 @@ Best regards,
 Jyotiram Nayak,
 Trainee,
 7600747611
+
+// GET: api/BloodBanks
+ [HttpGet]
+ [AllowAnonymous]
+ public async Task<ActionResult<IEnumerable<BloodBank>>> GetBloodBanks(int page =1, int pageSize =10, string? filterOn=null, string? filterQuery=null, string? sortBy = null, bool isAccending = true)
+ {
+     if (_context.BloodBanks == null)
+     {
+         return NotFound();
+     }
+
+     //filtering
+     var BloodBanks = _context.BloodBanks.AsQueryable();
+
+     if(string.IsNullOrWhiteSpace(filterOn) == false && string.IsNullOrWhiteSpace(filterQuery) == false)
+     {
+         if (filterOn.Equals("BloodBankName", StringComparison.OrdinalIgnoreCase))
+         {
+             BloodBanks = BloodBanks.Where(x=>x.BloodBankName.Contains(filterQuery));
+         }
+
+         else if (filterOn.Equals("Address", StringComparison.OrdinalIgnoreCase))
+         {
+             BloodBanks = BloodBanks.Where(x => x.Address.Contains(filterQuery));
+         }
+
+     }
+
+     //sorting
+     if(string.IsNullOrWhiteSpace(sortBy) == false)
+     {
+         if (sortBy.Equals("BloodBankName", StringComparison.OrdinalIgnoreCase))
+         {
+             BloodBanks = isAccending ? BloodBanks.OrderBy(x=>x.BloodBankName) : BloodBanks.OrderByDescending(x => x.BloodBankName);
+         }
+
+         if (sortBy.Equals("Address", StringComparison.OrdinalIgnoreCase))
+         {
+             BloodBanks = isAccending ? BloodBanks.OrderBy(x => x.Address) : BloodBanks.OrderByDescending(x => x.Address);
+         }
+
+     }
+
+     //pagination
+
+     return await BloodBanks.Skip((page-1)*pageSize).Take(pageSize).ToListAsync();
+ }
